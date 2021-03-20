@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理</title>
+    {% include 'head.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="row">
+<div class="col-md-10 offset-md-1">
+<div class="table-responsive">
+    <table  class="table table-hover">
+    <thead class="table-info">
+    <tr>
+        <td>角色</td>
+        <td>权限</td>
+        <td colspan="2">操作<i class="fa fa-pencil-square"></i></td>
+    </tr>
+	</thead>
+    <tbody>
+    {% for role in role_list %}
+        <tr>
+            <td>{{ role.title }}</td>
+            <td>{{ role.permissions.all }}</td>
+            <td><a href="/rbac/roles/edit/{{ role.id }}" class="btn btn-primary" role="button">编辑<i class="fa fa-edit"></i></a></td>
+            <td><a href="/rbac/roles/delete/{{ role.id }}" class="btn btn-danger" role="button">删除<i class="fa fa-trash"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/rbac/roles/new" class="btn btn-primary" role="button">新增<i class="fa fa-plus"></i></a>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

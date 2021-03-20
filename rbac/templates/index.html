@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include "head.html" %}
+</head>
+<body>
+{% include "nav.html" %}
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-dark" style="height: 450px;">
+                <div class="card-header">
+                    <h5>欢迎&nbsp;{{ username }}&nbsp;{{ name }}&nbsp;
+                    {% if ttype == 0  %}
+                        同学
+                    {% else %}
+                        老师
+                    {% endif %}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <br/>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>学号:</strong>{{ username }}</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>姓名:</strong>{{ name }}</p>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>性别:</strong>男</p>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>专业:</strong>计算机科学与技术</p>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>年级:</strong>2016</p>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>行政班:</strong>一班</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-dark" style="width: 550px; height: 450px;; margin: 0 auto">
+                <div class="card-header">
+                    <h5 class="text-center">成绩统计</h5>
+                </div>
+                    <div id="container" class="card-body"></div>
+<script language="JavaScript">
+$(document).ready(function() {
+   var chart = {
+      type: 'column'
+   };
+   var title = {
+      text: '所修学分情况统计'
+   };
+   var subtitle = {
+      text: '详细信息请进入成绩查询栏'
+   };
+   var xAxis = {
+      categories: ['公共基础课','素质选修课','跨专业选修课','专业基础课','专业核心课','专业选修课','实践课程'],
+      crosshair: true
+   };
+   var yAxis = {
+      min: 0,
+      title: {
+         text: '学分(分)'
+      }
+   };
+   var tooltip = {
+      headerFormat: '<span style="font-size:20px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+         '<td style="padding:0"><b>{point.y:.1f} 分</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+   };
+   var plotOptions = {
+      column: {
+         pointPadding: 0.02,
+         borderWidth: 0
+      }
+   };
+   var credits = {
+      enabled: false
+   };
+
+   var series= [{
+        name: '已修学分',
+            data: [21, 4, 3, 18, 30, 18.5, 26]
+        }, {
+            name: '还需学分',
+            data: [25, 2, 1, 0, 6, 2.5, 6]
+        }, {
+            name: '未通过学分',
+            data: [0, 0, 0, 0, 0, 0, 0]
+        }];
+
+   var json = {};
+   json.chart = chart;
+   json.title = title;
+   json.subtitle = subtitle;
+   json.tooltip = tooltip;
+   json.xAxis = xAxis;
+   json.yAxis = yAxis;
+   json.series = series;
+   json.plotOptions = plotOptions;
+   json.credits = credits;
+   $('#container').highcharts(json);
+
+});
+</script>
+                </div>
+            </div>
+    <div class="col-md-5">
+        <div class="card text-dark" style="height: 450px;">
+        <div class="card-header">
+            <h5 class="text-center">课程表</h5>
+        </div>
+        <div class="card-body">
+            {% include 'course_table.html' %}
+        </div>
+        </div>
+    </div>
+        </div>
+</div>
+<br/>
+{% include "bottom.html" %}
+</body>
+</html>

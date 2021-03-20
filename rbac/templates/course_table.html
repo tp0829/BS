@@ -1,0 +1,29 @@
+<div class="table-responsive">
+<table class="table-hover text-center table-bordered"width="100%">
+<thead class="table-info">
+        <tr>
+        <!-- 标题栏-->
+        <th width="60px" bgcolor="DarkOrchid" style="color: white">节次</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周一</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周二</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周三</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周四</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
+		<th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
+      </tr>
+        </thead>
+<tbody>
+	  {% for h in table %}
+      <tr height=28px align="center">
+        <td align="center">{{ forloop.counter }}</td>
+		{% for l in h %}
+            {% ifnotequal l.len "0" %}
+			<td rowspan={{l.len}} bgcolor={{l.color}}>{{l.name}}&nbsp;{{l.place}}&nbsp;{{l.week}}</td>
+			{% endifnotequal %}
+		{% endfor %}
+      </tr>
+	  {% endfor %}
+</tbody>
+    </table>
+</div>

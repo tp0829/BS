@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加教师</title>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        用户名:
+        <input type="text" name="username">
+    </p>
+    <p>
+        密码：
+        <input type="password" name="password">
+    </p>
+    <p>
+        姓名：
+        <input type="text" name="name">
+    </p>
+    <p>
+        邮箱：
+        <input type="text" name="email">
+    </p>
+    <p>
+        手机：
+        <input type="text" name="phone">
+    </p>
+    性别：
+    <select name = 'gender' id="gender">
+        <option value = "{{ gender }}"> {{ gender }} </option>
+    </select>
+    <br>
+    <br>
+
+    <p>
+        生日：
+        <input id="birthday" type="text" name="birthday" value="{{ birthday }}">
+    </p>
+    <script>
+        $('#birthday').cxCalendar({
+            type: 'datetime',
+            format: 'YYYY-MM-DD'
+        });
+    </script>
+
+
+     院系：
+    <select name = 'school' id="school">
+          <option value = "{{school}}">{{school}}</option>
+    </select>
+    <br>
+    <br>
+
+    <p>
+        角色：
+        <input type="text" name="role" value="{{ role }}">
+    </p>
+    <p>
+        学位：
+        <input type="text" name="diploma" value="{{ diploma }}">
+    </p>
+    <p>
+        职称：
+        <input type="text" name="title" value="{{ title }}">
+    </p>
+    <p>
+        <input type="submit" value="修改">
+        <p style="color: red">{{ error_msg }}</p>
+    </p>
+</form>
+</body>
+</body>
+</html>

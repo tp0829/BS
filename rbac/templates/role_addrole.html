@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加角色</title>
+    {% include 'head.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<form class="form" method="post">
+    {% csrf_token %}
+    {{ model_form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block btn-lg">提交</button>
+</form>
+</div>
+</div>
+</div>
+{% include 'bottom.html' %}
+</body>
+</html>

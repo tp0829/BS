@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-md bg-info navbar-dark mb-4">
+  <a class="navbar-brand" href="/index/"><img src="/static/images/ahu.png" style="height: auto;width: 150px"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        网上选课
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/course/select/">选课</a>
+        <a class="dropdown-item" href="/course/del/">退课</a>
+      </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/course/grade/">成绩查询</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/query/coursetable/">查看课表</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/teacher/submit/">成绩录入</a>
+      </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        用户管理
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/rbac/users/">所有用户</a>
+        <a class="dropdown-item" href="/rbac/users/addstu/">添加学生</a>
+        <a class="dropdown-item" href="/rbac/users/addtea/">添加老师</a>
+        <a class="dropdown-item" href="/rbac/users/addadm/">添加管理员</a>
+      </div>
+      </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        课程管理
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/course/">所有课程</a>
+        <a class="dropdown-item" href="/course/add_course/">添加课程</a>
+      </div>
+      </li>
+       <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        角色管理
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/rbac/roles/">角色</a>
+        <a class="dropdown-item" href="/rbac/roles/new/">添加角色</a>
+      </div>
+      </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        权限管理
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/rbac/permissions/">权限</a>
+        <a class="dropdown-item" href="/rbac/permissions/new/">添加权限</a>
+      </div>
+      </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        菜单管理
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/rbac/menus/">菜单</a>
+        <a class="dropdown-item" href="/rbac/menus/new/">添加菜单</a>
+      </div>
+      </li>
+        <form class="form-inline">
+        <input class="form-control" type="text" placeholder="搜索">
+        <button class="btn btn-success" type="button">搜索</button>
+        </form>
+      <li class="nav-item">
+        <a class="nav-link" href="/rbac/users/edit/{{ id }}">个人信息</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout/">退出<i class="fa fa-sign-out"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>

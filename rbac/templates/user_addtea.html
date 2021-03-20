@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加教师</title>
+    {% include 'head.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<form class="form", method="post">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i>&nbsp;工&nbsp;&nbsp;&nbsp;&nbsp;号</span></div>
+        <input type="text" class="form-control input-lg" name="username" placeholder="请输入学工号">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-lock"></i>&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码</span></div>
+        <input type="password" class="form-control input-lg" name="password" placeholder="请输入密码">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-id-card-o"></i>&nbsp;姓&nbsp;&nbsp;名</span></div>
+        <input type="text" class="form-control input-lg" name="name" placeholder="请输入姓名">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope"></i>&nbsp;邮&nbsp;&nbsp;&nbsp;箱</span></div>
+        <input type="text" class="form-control input-lg" name="email" placeholder="请输入邮箱">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone-square"></i>&nbsp;手&nbsp;&nbsp;&nbsp;机</span></div>
+        <input type="text" class="form-control input-lg" name="phone" placeholder="请输入手机">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-venus-mars"></i>&nbsp;性&nbsp;&nbsp;别</span></div>
+        <input type="text" class="form-control input-lg" name="gender" placeholder="请输入性别">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-birthday-cake"></i>&nbsp;生&nbsp;&nbsp;&nbsp;日</span></div>
+        <input type="date" class="form-control input-lg" name="birthday"  id="birthday" placeholder="请输入生日">
+    </div>
+{#    <script>#}
+{#        $('#birthday').cxCalendar({#}
+{#            type: 'datetime',#}
+{#            format: 'YYYY-MM-DD'#}
+{#        });#}
+{#    </script>#}
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-university"></i>&nbsp;学&nbsp;&nbsp;&nbsp;院</span></div>
+    <select name = "school" id="school" class="form-control input-lg">
+          <option value = " "> </option>
+      {% for x in school_list %}
+          <option value ="{{ x }}">{{ x }}</option>
+      {% endfor %}
+    </select>
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user-secret"></i>&nbsp;角&nbsp;&nbsp;&nbsp;&nbsp;色</span></div>
+        <input type="text" class="form-control input-lg" name="role" placeholder="请输入角色">
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-graduation-cap"></i>&nbsp;学&nbsp;&nbsp;位</span></div>
+        <input type="text" class="form-control input-lg" name="diploma" placeholder="请输入学位">
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-vcard"></i>&nbsp;职&nbsp;&nbsp;&nbsp;称</span></div>
+        <input type="text" class="form-control input-lg" name="title" placeholder="请输入职称">
+    </div>
+    <button type="submit" class="btn btn-block btn-primary mb-3">确&nbsp;定&nbsp;<i class="fa fa-user-plus"></i></button>
+    {% if message %}
+        <div class="alert alert-danger">
+            {{ error_msg }}
+        </div>
+    {% endif %}
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

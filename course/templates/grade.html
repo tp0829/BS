@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成绩查询</title>
+    {% include 'head.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="row">
+<div class="col-md-10 offset-md-1">
+<div class="card">
+<div class="card-header">
+<h6>学号：{{ username }}&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{ name }}</h6>
+</div>
+<div class="card-body">
+<div class="table-responsive">
+    <table  class="table table-hover">
+    <thead class="table-info">
+    <tr>
+        <td>课程编号</td>
+        <td>课程名称</td>
+        <td>课程性质</td>
+        <td>成绩</td>
+        <td>任课教师工号</td>
+        <td>任课教师姓名</td>
+        <td>学期</td>
+    </tr>
+	 </thead>
+    <tbody>
+    {% for sc in SC_list %}
+        <tr>
+            <td>{{ sc.course_id.id }}</td>
+            <td>{{ sc.course_id.name }}</td>
+            <td>{{ sc.type }}</td>
+            <td>{{ sc.score }}</td>
+            <td>{{ sc.course_id.teacher_id.username }}</td>
+            <td>{{ sc.course_id.teacher_id.name }}</td>
+            <td>未定义</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% include 'bottom.html' %}
+</body>
+</html>

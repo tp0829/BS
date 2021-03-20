@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% include "head.html" %}
+  <script type="text/javascript">
+  // $(function() {
+  //       $('#form2').submit(function() { //当提交表单时，会发生 submit 事件。
+
+  //         var postData = $("#form2").serialize(); //序列化表单，后台可正常通过post方法获取数据
+  //           $.ajax({
+  //               type: "POST",
+  //               url: "/course/add_course/",
+  //               data: postData,
+  //               success: function(data) {
+  //                       alert(data);
+  //                       window.location.reload();//刷新当前页面.
+  //               },
+  //               error: function(){
+  //                 alert("提交失败");
+  //               }
+  //           });
+  //       });
+  //   });
+  </script>
+</head>
+
+<body>
+  {% include "nav.html" %}
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-12">
+
+        <div class="card text-center">
+          <div class="card-header">
+            <div>
+              <p style="text-align: center; font: 2em sans-serif;">添&nbsp;&nbsp;加&nbsp;&nbsp;课&nbsp;&nbsp;程</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <form method="post" id="form2">
+                {%csrf_token%}
+                <div style=" width: 14%;float:left;">
+                <p style="font: 1.5em sans-serif;line-height:150%;">课程添加&nbsp;&nbsp;|&nbsp;</p>
+            </div>
+            课程名称
+            <input type="text" value="" name="name">
+            学分
+            <input style="width: 60px;" type="number" value="" name="score" size="10" min="1" max="6">
+            课程代码
+            <input type="text" value="" name="code" size="10">
+            人数上限
+            <input type="number" value="" name="cap" size="10" min="15" max="120">
+            <br><br>
+            <div style="width: 6%;float:left;">
+              <p style="text-align:right; line-height:220%;">上课周:&nbsp;</p>
+            </div>
+            <select name="上课周" class="form-control" style="width: 10%;float:left;">
+              {% for item in week_list %}
+              <option value={{item}}>{{item}}</option>
+              {% endfor %}
+            </select>
+            <div style="width: 6%;float:left;">
+              <p style="text-align:right; line-height:220%;">课时:&nbsp;</p>
+            </div>
+            <select name="课时" class="form-control" style="width: 10%;float:left;">
+              {% for item in length_list %}
+              <option value={{item}}>{{item}}</option>
+              {% endfor %}
+            </select>
+            </select>
+            <div style="width: 10%;float:left;">
+              <p style="width: 100px; float:left;text-align:right; line-height:220%;">上课老师:&nbsp;</p>
+            </div>
+            <select name="上课老师" class="form-control" style="width: 16%;float:left;" multiple="multiple">
+              {% for item in teacher_list %}
+              <option value={{item.id}}>{{item.username}} {{item.name}}</option>
+              {% endfor %}
+            </select>
+            <div style="width: 2%;float:left;">
+              <p>&nbsp;</p>
+            </div>
+            <button type="submit" name="添加" value="添加" style="float:left;" class="btn btn-secondary">添&nbsp;加</button>
+            </form>
+          </div>
+          {% if show %}
+          <div>
+            <table class="table table-hover table-striped">
+              <tr>
+                <th>课程名称</th>
+                <th>课程学分</th>
+                <th>授课老师的id</th>
+                <th>上课时间</th>
+                <th>上课地点</th>
+                <th>开课院系</th>
+                <th>已选人数</th>
+                <th>人数上限</th>
+              </tr>
+              {% for item in course_list %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.score }}</td>
+                <td>{{ item.teacher_id }}</td>
+                <td>{{ item.time }}</td>
+                <td>{{ item.place }}</td>
+                <td>{{ item.school }}</td>
+                <td>{{ item.num }}</td>
+                <td>{{ item.cap }}</td>
+              </tr>
+
+              {% endfor %}
+            </table>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+  </div>
+  </div>
+  <div style="width:100%;position:relative;left:0; bottom:-5px;z-index:-1;">
+    <br>
+    {% include "bottom.html" %}
+  </div>
+
+</body>
+
+</html>

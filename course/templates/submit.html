@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>submit</title>
+</head>
+<body>
+<form name="student" id="student" method="POST">
+    {% csrf_token %}
+    <select name = 'course' id="course">
+          <option value = " "> </option>
+      {% for x in course_name_list %}
+          <option value ="{{ x.name }}">{{ x.name }}</option>
+      {% endfor %}
+    </select>
+    <div name='table' id="table">
+     <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>分数</th>
+    </tr>
+    </div>
+
+    <input type='submit' value='提交'>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+    $("#course").change(function() {
+      var course_name = $(this).val();
+
+      $.ajax({
+        url: '/course/ajax/load_stu_list/',
+        data: {
+          'course_name': course_name
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            var content='<tr> <th>学号</th> <th>姓名</th> <th>分数</th> </tr> ';
+            $.each(data, function(i, item){
+                  content+='<tr><th>' + item.stu_id + '</th> <th>' + item.stu_name + '</th> <th>' +
+                      '<input name = score' + i + ' value=' + item.stu_score + '></input>' +
+                      '</th> </tr>'
+                });
+            $('#table').html(content)
+        },
+
+      });
+    });
+ </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加学生</title>
+    {% include 'head.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<form class="form", method="post">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i>&nbsp;学工号</span></div>
+        <input type="text" class="form-control input-lg" name="username" placeholder="请输入学工号">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-lock"></i>&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码</span></div>
+        <input type="password" class="form-control input-lg" name="password" placeholder="请输入密码">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-id-card-o"></i>&nbsp;姓&nbsp;&nbsp;名</span></div>
+        <input type="text" class="form-control input-lg" name="name" placeholder="请输入姓名">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope"></i>&nbsp;邮&nbsp;&nbsp;&nbsp;箱</span></div>
+        <input type="text" class="form-control input-lg" name="email" placeholder="请输入邮箱">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone-square"></i>&nbsp;手&nbsp;&nbsp;&nbsp;机</span></div>
+        <input type="text" class="form-control input-lg" name="phone" placeholder="请输入手机">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-venus-mars"></i>&nbsp;性&nbsp;&nbsp;别</span></div>
+        <input type="text" class="form-control input-lg" name="gender" placeholder="请输入性别">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-birthday-cake"></i>&nbsp;生&nbsp;&nbsp;&nbsp;日</span></div>
+        <input type="date" class="form-control input-lg" name="birthday"  id="birthday" placeholder="请输入生日">
+    </div>
+{#    <script>#}
+{#        $('#birthday').cxCalendar({#}
+{#            type: 'datetime',#}
+{#            format: 'YYYY-MM-DD'#}
+{#        });#}
+{#    </script>#}
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-university"></i>&nbsp;学&nbsp;&nbsp;院</span></div>
+    <select name = "school" id="school" class="form-control input-lg">
+          <option value = " "> </option>
+      {% for x in school_list %}
+          <option value ="{{ x }}">{{ x }}</option>
+      {% endfor %}
+    </select>
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-book"></i>&nbsp;专&nbsp;&nbsp;&nbsp;业</span></div>
+    <select name = 'major' id="major" class="form-control input-lg">
+    <option value =" "> </option>
+      {% for x in major_list %}
+          <option value ="{{ x }}">{{ x }}</option>
+      {% endfor %}
+    </select>
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar-check-o"></i>&nbsp;年&nbsp;&nbsp;&nbsp;级</span></div>
+    <select name = 'grade' id="grade" class="form-control input-lg">
+      <option value =" "> </option>
+      {% for x in grade %}
+          <option value ="{{ x }}">{{ x }}</option>
+      {% endfor %}
+    </select>
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-group"></i>&nbsp;班&nbsp;&nbsp;&nbsp;级</span></div>
+    <select name = 'class' id="class" class="form-control input-lg">
+        <option value =" "> </option>
+    </select>
+    </div>
+    <button type="submit" class="btn btn-block btn-primary mb-3">确&nbsp;定&nbsp;<i class="fa fa-user-plus"></i></button>
+    {% if message %}
+        <div class="alert alert-danger">
+            {{ error_msg }}
+        </div>
+    {% endif %}
+</form>
+
+<script>
+$(function () {
+     $("#school").change(function() {
+      var school = $(this).val();
+
+      $.ajax({
+        url: '/ajax/load_major/',
+        data: {
+          'school': school
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            var content='';
+            content += '<option value=  >   </option>';
+            $.each(data, function(i, item){
+                  content+='<option value='+item.majorname+'>'+item.majorname+'</option>'
+                });
+            $('#major').html(content)
+        },
+
+      });
+    });
+});   
+ </script>
+
+<script>
+    $("#major").change(function() {
+      var major = $(this).val();
+
+      $.ajax({
+        url: '/ajax/load_grade/',
+        data: {
+          'major': major
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            var content='';
+            content += '<option value=  >   </option>';
+            $.each(data, function(i, item){
+                  content+='<option value='+item.grade+'>'+item.grade+'</option>'
+                });
+            $('#grade').html(content)
+        },
+
+      });
+    });
+ </script>
+
+<script>
+    $("#grade").change(function() {
+      var grade = $(this).val();
+      var major = $('#major').val();
+
+     $.ajax({
+        url: '/ajax/load_class/',
+        data: {
+          'major': major, 'grade': grade,
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            var content='';
+            content += '<option value=  >   </option>';
+            $.each(data, function(i, item){
+                  content+='<option value='+item.classname+'>'+item.classname+'</option>'
+                });
+            $('#class').html(content)
+        },
+
+      });
+
+    });
+ </script>
+</div>
+</div>
+</div>
+{% include 'bottom.html' %}
+</body>
+</html>

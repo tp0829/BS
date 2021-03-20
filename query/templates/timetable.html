@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% include "head.html" %}
+</head>
+
+<body>
+  {% include "nav.html" %}
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-12">
+
+        <div class="card text-center">
+          <div class="card-header">
+            <div>
+              <p style="text-align: center; font: 2em sans-serif;">我&nbsp;&nbsp;的&nbsp;&nbsp;课&nbsp;&nbsp;表</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover table-striped">
+              <tr>
+                <!-- 标题栏-->
+                <th width="60px" bgcolor="DarkOrchid" style="color: white">节次</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周一</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周二</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周三</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周四</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
+                <th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
+              </tr>
+	  {% for h in table %}
+      <tr height="37px" align="center">
+        <td align="center">{{ forloop.counter }}</td>
+		{% for l in h %}
+
+            {% ifnotequal l.len "0" %}
+			<td rowspan={{l.len}} bgcolor={{l.color}}>
+                {% for tmp in l.time %}
+                {{tmp.name}}<br />{{tmp.place}}<br />{{tmp.week}}<br/>
+                {% endfor %}
+            </td>
+			{% endifnotequal %}
+		{% endfor %}
+      </tr>
+	  {% endfor %}
+            </table>
+            <hr>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">&nbsp;</div>
+    </div>
+  </div>
+  <div style="width:100%;position:relative;left:0; bottom:-5px;z-index:-1;">
+    <br>
+    {% include "bottom.html" %}
+  </div>
+</body>
+
+</html>
